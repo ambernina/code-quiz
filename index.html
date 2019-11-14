@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+  </head>
+  <body>
+    <div id="highscores">
+      <button type="button" class="btn btn-light">View highscores</button>
+    </div>
+
+    <div id="timer">
+      Time Left :
+      <input id="seconds" type="text" />
+    </div>
+<div class="row justify-content-center">
     
+    <div class="col-md-7">
+    
+        <!-- <h1>Code Quiz</h1> -->
+        <div class="quiz-container clearfix">
+          <div id="quiz"></div>
+        </div>
+        <button id="previous">Previous Question</button>
+        <button id="next">Next Question</button>
+        <button id="submit">Submit Quiz</button>
+        <div id="results"></div>
+    
+    </div>
 
+</div>
 
+    <!-- <button id="clear"></button> -->
     <script src="js/script.js"></script>
-</body>
+    <script src="js/questions.js"></script>
+  </body>
 </html>
