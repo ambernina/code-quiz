@@ -15,13 +15,12 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="highscores">
-      <button type="button" class="btn btn-light">View highscores</button>
+    <div id="highscoresDiv">
+      <button type="button" class="btn btn-light" id="highscores">View highscores</button>
     </div>
 
-    <div id="timer">
-      Time Left :
-      <input id="seconds" type="text" />
+    <div id="timerDiv">
+      Time Left :<span id="timer"></span>
     </div>
 <div class="row justify-content-center">
     
@@ -31,9 +30,13 @@
         <div class="quiz-container clearfix">
           <div id="quiz"></div>
         </div>
-        <button id="previous">Previous Question</button>
-        <button id="next">Next Question</button>
-        <button id="submit">Submit Quiz</button>
+        <div class="row justify-content-center">
+            <button id="previous">Previous Question</button>
+            <button id="next">Next Question</button>
+        </div>
+        <div class="row justify-content-center">
+            <button id="submit">Submit Quiz</button>
+        </div>
         <div id="results"></div>
     
     </div>
