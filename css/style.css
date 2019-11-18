@@ -1,13 +1,17 @@
 
-#timer {
+#timerDiv {
     float: right;
     margin: 2px;
     color: #026069;
 }
 
-#highscores {
+#highscoresDiv {
     float: left;
     margin: 2px;
+}
+
+#previous, #next, #submit {
+  margin: 20px;
 }
 
 .btn-light {
