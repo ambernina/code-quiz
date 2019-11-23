@@ -32,7 +32,7 @@ highscoreBtn.addEventListener("click", function() {
 submitBtn.addEventListener("click", function() {
 	var input = document.querySelector("#initials").value;
 	var score = totalPoints + totalTime;
-	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || 0;
+	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
 	var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
 	console.log("highscore", highscore);
 	console.log("list", allscores);
