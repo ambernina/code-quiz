@@ -13,18 +13,18 @@ highscoreBtn.addEventListener("click", function() {
 	document.getElementById("highscoreDisp").innerHTML = "";
 	var hsList = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
 	if (scoresDiv.style.display === "none") {
-    scoresDiv.style.display = "flex";
-    hsList.map(a => {
-      var ele = document.createElement("h3");
-      var node = document.createTextNode(a);
-      ele.appendChild(node);
-      document.getElementById("highscoreDisp").appendChild(ele);
-    });
+		scoresDiv.style.display = "flex";
+		hsList.map(a => {
+			var ele = document.createElement("h3");
+			var node = document.createTextNode(a);
+			ele.appendChild(node);
+			document.getElementById("highscoreDisp").appendChild(ele);
+		});
 	} else {
-    scoresDiv.style.display = "none";
-    // document.getElementById("highscoreDisp").empty();
-    // scoresDiv.empty();
-    // hsList.empty();
+		scoresDiv.style.display = "none";
+		// document.getElementById("highscoreDisp").empty();
+		// scoresDiv.empty();
+		// hsList.empty();
 	}
 	console.log("Hello");
 });
@@ -33,20 +33,17 @@ submitBtn.addEventListener("click", function() {
 	var input = document.querySelector("#initials").value;
 	var score = totalPoints + totalTime;
 	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || 0;
-	var allscores =
-		JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
+	var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
 	console.log("highscore", highscore);
 	console.log("list", allscores);
 	if (score > highscore) {
 		//set totalPoints to highscore, append to DOM
 		highscore = score;
+		localStorage.setItem("Highscore", JSON.stringify(highscore));
 	}
 	allscores.push(input + score);
 	console.log(input);
-	localStorage.setItem(
-		"Highscore",
-		JSON.stringify({ highscore: highscore, highscoreArr: allscores })
-	);
+	localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
 	startAgain();
 });
 
