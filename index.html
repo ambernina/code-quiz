@@ -13,38 +13,95 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   </head>
+
   <body>
-    <div id="highscoresDiv">
-      <button type="button" class="btn btn-light" id="highscores">View highscores</button>
+    <header class="clearfix">
+      <div id="highscoresDiv">
+        <button type="button" class="btn btn-light" id="highscores">
+          View highscores
+        </button>
+        <!-- <button type="button" class="btn btn-light" id="highscores" data-toggle="popover" title="Highscore:">View highscores</button> -->
+      </div>
+
+      <div id="timerDiv">Time Left : <span id="timer"></span></div>
+    </header>
+
+    <div class="row justify-content-center"  id="startDiv">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h1>Coding Quiz Challenge</h1>
+          <h5>Try to answer the following code-related questions within the time limit. Keep in mind that wrong answers will penalize your score/time by 10 seconds!</h5>
+          <h3>Good luck!</h3>
+        </div>
+
+      </div>
+      <div class="row justify-content-center">    
+        <div class="col-md" id="startQuiz">
+          <button>Start Quiz</button>
+        </div>
+      </div>
     </div>
 
-    <div id="timerDiv">
-      Time Left :<span id="timer"></span>
-    </div>
-<div class="row justify-content-center">
-    
-    <div class="col-md-8">
-    
+    <div class="row justify-content-center">
+      <div class="col-md-8" id="quizDiv">
         <!-- <h1>Code Quiz</h1> -->
-        <div class="quiz-container clearfix">
-          <div id="quiz"></div>
+        <div class="quiz-container">
+          <div id="quizQ"></div>
+          <div class="row justify-content-center" id="choiceBtns"></div>
+          <div id="answer"></div>
+        </div>
+    </div>
+  </div>
+
+    <div class="row justify-content-center">
+      <div class="end-container" id="endQuiz">
+        <div class="col-md">
+          <h1>You finished!</h1>
+          <h3>Your score is</h3>
+          <h1 id="score"></h1>
         </div>
         <div class="row justify-content-center">
-            <button id="previous">Previous Question</button>
-            <button id="next">Next Question</button>
+          <div class="col-md end">
+              <input
+              type="text"
+              id="initials"
+              placeholder="Please Enter your Initials..."
+              />
+
+          </div>
+          <div class="col-md">
+              <button id="submit">Submit Quiz</button>
+
+          </div>
         </div>
-        <div class="row justify-content-center">
-            <button id="submit">Submit Quiz</button>
-        </div>
-        <div id="results"></div>
-    
+      </div>
     </div>
 
-</div>
+    <div class="row justify-content-center" id="startOver">
+      <div class="end-container">
+        <div class="col-md">
+          <h1>Would you like to play again?</h1>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md" id="restartDiv">
+              <button id="restart">Start Over</button>
 
-    <!-- <button id="clear"></button> -->
-    <script src="js/script.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" id="scoresDiv">
+      <div class="col-md-5" id="highscoreDisp">
+        <h1>Scores: </h1>
+      </div>
+
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
