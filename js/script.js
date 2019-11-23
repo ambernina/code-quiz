@@ -1,66 +1,129 @@
 $(document).ready(function() {
-  var startQuiz = document.querySelector("#highscores");
-  var timerSpan = document.querySelector("#timer");
+	var startQuiz = document.querySelector("#startQuiz");
+	var timerSpan = document.querySelector("#timer");
+	var startDiv = document.querySelector("#startDiv");
+	var quizDiv = document.querySelector("#quizDiv");
+	var hideMeDivs = document.querySelector(".hide-me");
+	var endQuiz = document.querySelector("#endQuiz");
+	//   var unhideDivs = document.querySelector(".unhide");
+	//   var highscoresBtn = document.querySelector("#highscores");
+	// var nextButton = document.querySelector("#next");
+	// var prevButton = document.querySelector("#prev");
+	var count = 0;
+	var startButton = false;
+	// var gameOver = false;
+	var points = 0;
 
-  var startButton = false;
+	// var score = THIS WILL BE TIME LEFT ON TIMER WHEN LAST QUESTION HAS BEEN ANSWERED
 
-  // var score = THIS WILL BE TIME LEFT ON TIMER WHEN LAST QUESTION HAS BEEN ANSWERED
-  
-  startQuiz.addEventListener("click", function() {
-      startButton = true;
-      timer();
-    });
-    
-    function timer() {
-        var counter = 75;
-        var countdown = function() {
-            if (startButton && counter == -1) {
+	startQuiz.addEventListener("click", function() {
+		startButton = true;
+		startDiv.style.display = "none";
+		hideMeDivs.style.display = "none";
+		quizDiv.style.display = "block";
+		// unhideDivs.style.display = "block";
+		timer();
+		generateQuestions();
+	});
+
+	function timer() {
+		var counter = 75;
+        setInterval(function () {
+            // event.preventDefault();
+            if (counter == -1) {
                 clearInterval(counter);
+                // alert("You're out of time!");
             } else if (startButton) {
                 timerSpan.textContent = counter;
                 counter--;
-            }
-        };
-        setInterval(countdown, 1000);
-        countdown();
-    }
-    
+            } 
+            // else if (gameOver) {
+            // 	clearInterval(counter);
+            // 	timerSpan.textContent = counter;
+            // }
 
-    
-    
+        }, 1000);
+        // countdown();
+	};
+
+	// function stopTimer() {
+	// 	clearInterval(timer);
+	// }
+
+	generateQuestions = () => {
+		document.getElementById("quizQ").innerHTML = questions[count].title;
+		document.getElementById("choiceBtns").innerHTML = "";
+
+		questions[count].choices.map((choice, i) => {
+			var btn = document.createElement("button");
+			var textnode = document.createTextNode(choice);
+			btn.appendChild(textnode);
+			document.getElementById("choiceBtns").appendChild(btn);
+			btn.setAttribute("data", choice);
+			btn.setAttribute("id", `btn${i}`);
+			btn.setAttribute("answer", questions[count].answer);
+			document.getElementById("answer").textContent = "";
+
+			document.querySelector(`#btn${i}`).addEventListener("click", function(e) {
+				console.log(e.target.getAttribute("data"));
+				if (e.target.getAttribute("data") === e.target.getAttribute("answer")) {
+					answeredRight();
+				} else {
+					answeredWrong();
+				}
+			});
+		});
+	};
+
+	answeredRight = () => {
+        // var answerP = document.createElement("p");
+        var answerCMsg = document.getElementById("answer").textContent = "Correct!";
+		console.log(answerCMsg);
+		count++;
+		points++;
+		if (count === questions.length) {
+            endGame();
+		} else {
+            generateQuestions();
+            // answerCMsg.appendChild(answerP);
+		}
+	};
+
+	answeredWrong = () => {
+        // var answerP = document.createElement("p");
+		var answerIMsg = document.getElementById("answer").textContent = "Incorrect...";
+		console.log(answerIMsg);
+		count++;
+		points++;
+		if (count === questions.length) {
+			endGame();
+		} else {
+            generateQuestions();
+            // answerIMsg.appendChild(answerP);
+		}
+	};
+
+	function endGame() {
+        // gameOver = true;
+		quizDiv.style.display = "none";
+		endQuiz.style.display = "block";
+        // stopTimer();
+
+		// clearInterval(counter);
+	}
 });
 
-var questions = [
-    {
-        title: "Commonly used data types DO NOT include:",
-        choices: ["strings", "booleans", "alerts", "numbers"],
-        answer: "alerts"
-    },
-    {
-        title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        answer: "parentheses"
-    },
-    {
-        title: "What tag defines the body of the HTML document, and usually includes all the contents such as the text, hyperlinks, images, tables, lists, and more?",
-        choices: ["<head></head>", "<body></body>", "<title></title>", "<br>"],
-        answer: "<body></body>"
-    },
-    {
-        title: "What tag is used to define a hyperlink, or link to another page?",
-        choices: ["<strong>", "<blockquote>", "<em>", "<a>"],
-        answer: "<a>"
-    },
-    {
-        title: "CSS stands for ____ Style Sheets.",
-        choices: ["Curious", "Concept", "Cascading", "Concave"],
-        answer: "Cascading"
-    }
-];
-console.log(questions);
+//   nextButton.addEventListener("click", function() {
+//     //   event.stopPropagation();
+//       questions[count++];
+//      count++;
+//   });
 
-
-
+//   prevButton.addEventListener("click", function() {
+//     //   event.stopPropagation();
+//       questions[count--];
+//      count--;
+//   });
 // TUTOR SCRIPTS
 
 // localStorage.setItem("profile1", JSON.stringify(score));
@@ -80,31 +143,31 @@ console.log(questions);
 // };
 
 // function counter() {
-    //     var i = 0;
-  //     var funcNameHere = function(){
-  //         if (i == 100) clearInterval(this);
-  //         else console.log( 'Currently at ' + (i++) );
-  //     };
-  //     // This block will be executed 100 times.
-  //     setInterval(funcNameHere, 7000);
-  //     funcNameHere();
-  // } // End
+//     var i = 0;
+//     var funcNameHere = function(){
+//         if (i == 100) clearInterval(this);
+//         else console.log( 'Currently at ' + (i++) );
+//     };
+//     // This block will be executed 100 times.
+//     setInterval(funcNameHere, 7000);
+//     funcNameHere();
+// } // End
 
-  // function timer(){
-  //     setInterval(addTime, 1000)
-  // }
+// function timer(){
+//     setInterval(addTime, 1000)
+// }
 
-  // function addTime(){
-  //     $("#timer").html(`<h1>YOU HAVE ${counter} SECONDS LEFT!</h1>`)
-  //     counter -= 1
-  //     console.log(counter)
-  //     if(counter<=0){
-  //         alert('YOU LOSE!')
-  //     }
-  // }
+// function addTime(){
+//     $("#timer").html(`<h1>YOU HAVE ${counter} SECONDS LEFT!</h1>`)
+//     counter -= 1
+//     console.log(counter)
+//     if(counter<=0){
+//         alert('YOU LOSE!')
+//     }
+// }
 
-// OTHER SCRIPTS I DON'T WANT TO USE
-    
+// TUTORIAL SCRIPTS
+
 // var quizContainer = document.getElementById("quiz");
 // var resultsContainer = document.getElementById("results");
 // var submitButton = document.getElementById("submit");
@@ -112,7 +175,7 @@ console.log(questions);
 // // display quiz right away GET RID OF THIS
 
 // var previousButton = document.getElementById("previous");
-// var nextButton = document.getElementById("next");
+// vprevButton = document.getElementById("next");
 // var slides = document.querySelectorAll(".slide");
 // let currentSlide = 0;
 
