@@ -9,7 +9,7 @@ var highscore;
 var highscoreBtn = document.querySelector("#highscores");
 var scoresDiv = document.querySelector("#scoresDiv");
 
-highscoreBtn.addEventListener("click", function() {
+highscoreBtn.addEventListener("click", function () {
 	document.getElementById("highscoreDisp").innerHTML = "";
 	var hsList = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
 	if (scoresDiv.style.display === "none") {
@@ -29,44 +29,33 @@ highscoreBtn.addEventListener("click", function() {
 	console.log("Hello");
 });
 
-submitBtn.addEventListener("click", function() {
+submitBtn.addEventListener("click", function () {
 	// localStorage.setItem("")
 	// highscoreStorage = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
 	if (localStorage.getItem("Highscore") === null) {
-		localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
-		var input = document.querySelector("#initials").value;
-		var score = totalPoints + totalTime;
-		highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
-		var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
-		console.log("highscore", highscore);
-		console.log("list", allscores);
-		if (score > highscore) {
-			//set totalPoints to highscore, append to DOM
-			highscore = score;
-			localStorage.setItem("Highscore", JSON.stringify(highscore));
-		}
-		allscores.push(input + score);
-		console.log(input);
-		
-	} else {
-		localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
-		var input = document.querySelector("#initials").value;
-		var score = totalPoints + totalTime;
-		highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
-		var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
-		console.log("highscore", highscore);
-		console.log("list", allscores);
-		if (score > highscore) {
-			//set totalPoints to highscore, append to DOM
-			highscore = score;
-			localStorage.setItem("Highscore", JSON.stringify(highscore));
-		}
-		allscores.push(input + score);
-		console.log(input);
-
+		localStorage.setItem("Highscore", JSON.stringify({
+			highscore: 0,
+			highscoreArr: []
+		}));
 	}
+
+	var input = document.querySelector("#initials").value;
+	var score = totalPoints + totalTime;
+	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore;
+	var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr;
+
+	if (score > highscore) {
+		highscore = score;
+	}
+	allscores.push(input + score);
+	localStorage.setItem('Highscore', JSON.stringify({
+		highscore,
+		highscoreArr: allscores
+	}));
+
 	startAgain();
 });
+
 
 var startOverScreen = document.querySelector("#startOver");
 var restartBtn = document.querySelector("#restart");
@@ -76,7 +65,7 @@ function startAgain() {
 	startOverScreen.style.display = "flex";
 }
 
-restartBtn.addEventListener("click", function() {
+restartBtn.addEventListener("click", function () {
 	totalTime = 75;
 	count = 0;
 	totalPoints = 0;
@@ -134,7 +123,7 @@ generateQuestions = () => {
 		btn.setAttribute("id", `btn${i}`);
 		btn.setAttribute("answer", questions[count].answer);
 
-		document.querySelector(`#btn${i}`).addEventListener("click", function(e) {
+		document.querySelector(`#btn${i}`).addEventListener("click", function (e) {
 			console.log(e.target.getAttribute("data"));
 			if (e.target.getAttribute("data") === e.target.getAttribute("answer")) {
 				answeredRight();
@@ -149,13 +138,13 @@ var startDiv = document.querySelector("#startDiv");
 var quizDiv = document.querySelector("#quizDiv");
 var endQuiz = document.querySelector("#endQuiz");
 
-start.addEventListener("click", function() {
+start.addEventListener("click", function () {
 	console.log(totalTime);
 	startDiv.style.display = "none";
 	quizDiv.style.display = "block";
 	generateQuestions();
 
-	var interval = setInterval(function() {
+	var interval = setInterval(function () {
 		totalTime--;
 		timerSpan.innerHTML = totalTime;
 		console.log("tick .. " + totalTime);
