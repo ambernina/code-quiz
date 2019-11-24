@@ -31,20 +31,40 @@ highscoreBtn.addEventListener("click", function() {
 
 submitBtn.addEventListener("click", function() {
 	// localStorage.setItem("")
-	localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
-	var input = document.querySelector("#initials").value;
-	var score = totalPoints + totalTime;
-	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
-	var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
-	console.log("highscore", highscore);
-	console.log("list", allscores);
-	if (score > highscore) {
-		//set totalPoints to highscore, append to DOM
-		highscore = score;
-		localStorage.setItem("Highscore", JSON.stringify(highscore));
+	// highscoreStorage = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
+	if (localStorage.getItem("Highscore") === null) {
+		localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
+		var input = document.querySelector("#initials").value;
+		var score = totalPoints + totalTime;
+		highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
+		var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
+		console.log("highscore", highscore);
+		console.log("list", allscores);
+		if (score > highscore) {
+			//set totalPoints to highscore, append to DOM
+			highscore = score;
+			localStorage.setItem("Highscore", JSON.stringify(highscore));
+		}
+		allscores.push(input + score);
+		console.log(input);
+		
+	} else {
+		localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
+		var input = document.querySelector("#initials").value;
+		var score = totalPoints + totalTime;
+		highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
+		var allscores = JSON.parse(localStorage.getItem("Highscore")).highscoreArr || [];
+		console.log("highscore", highscore);
+		console.log("list", allscores);
+		if (score > highscore) {
+			//set totalPoints to highscore, append to DOM
+			highscore = score;
+			localStorage.setItem("Highscore", JSON.stringify(highscore));
+		}
+		allscores.push(input + score);
+		console.log(input);
+
 	}
-	allscores.push(input + score);
-	console.log(input);
 	startAgain();
 });
 
