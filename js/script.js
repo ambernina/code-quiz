@@ -31,6 +31,28 @@ highscoreBtn.addEventListener("click", function() {
 	}
 	console.log("Hello");
 });
+submitBtn.addEventListener('click', function() {
+	if (localStorage.getItem('Highscore') === null) {
+		localStorage.setItem(
+			'Highscore',
+			JSON.stringify({ highscore: 0, highscoreArr: [] })
+		);
+	}
+	var input = document.querySelector('#initials').value;
+	var score = totalPoints + totalTime;
+	highscore = JSON.parse(localStorage.getItem('Highscore')).highscore;
+	var allscores = JSON.parse(localStorage.getItem('Highscore')).highscoreArr;
+	if (score > highscore) {
+		//set totalPoints to highscore, append to DOM
+		highscore = score;
+	}
+	allscores.push(input + score);
+	localStorage.setItem(
+		'Highscore',
+		JSON.stringify({ highscore, highscoreArr: allscores })
+	);
+	startAgain();
+});
 
 function allScores() {
 	var values = [],
