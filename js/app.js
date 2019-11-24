@@ -30,6 +30,8 @@ highscoreBtn.addEventListener("click", function() {
 });
 
 submitBtn.addEventListener("click", function() {
+	// localStorage.setItem("")
+	localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
 	var input = document.querySelector("#initials").value;
 	var score = totalPoints + totalTime;
 	highscore = JSON.parse(localStorage.getItem("Highscore")).highscore || [];
@@ -43,7 +45,6 @@ submitBtn.addEventListener("click", function() {
 	}
 	allscores.push(input + score);
 	console.log(input);
-	localStorage.setItem("Highscore", JSON.stringify({ highscore: highscore, highscoreArr: allscores }));
 	startAgain();
 });
 
